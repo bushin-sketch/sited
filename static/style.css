@@ -1,0 +1,144 @@
+/* RESET E BASE */
+body {
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+    color: #f0f0f0;
+    font-family: 'Cinzel', serif; /* Se tiver, ou use sans-serif */
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+header { text-align: center; margin-bottom: 30px; }
+header h1 { color: #ffcc00; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); font-size: 2.5em; margin: 0; }
+.subtitle { color: #888; font-style: italic; }
+
+/* LAYOUT LADO A LADO (ESCUDO) */
+.escudo-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.aba-escudo {
+    flex: 1;
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid #ffcc00;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,1);
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+}
+
+.aba-escudo h2 {
+    text-align: center;
+    color: #fff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+}
+
+/* FORMS */
+.form-escudo { margin-bottom: 20px; }
+textarea, input {
+    background: #000;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+textarea:focus, input:focus { border-color: #ffcc00; outline: none; }
+
+.btn-primary {
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/* CARDS: FLUTUA E BRILHA */
+.card {
+    background: #151515;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ffcc00;
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+}
+
+.card-cronica { border-left: 4px solid #ffcc00; }
+.card-header { display: flex; justify-content: space-between; color: #ffcc00; margin-bottom: 10px; }
+
+/* PERSONAGENS NO ESCUDO */
+.grid-herois {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.card-heroi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hp-display { color: #ff4444; font-weight: bold; margin-top: 5px; }
+.badge { background: #333; padding: 2px 8px; font-size: 0.8em; border-radius: 4px; }
+
+.morto { opacity: 0.4; filter: grayscale(1); border-color: #f44 !important; }
+
+/* SCROLLBAR CUSTOMIZADA */
+.scroll-area {
+    overflow-y: auto;
+    padding-right: 10px;
+}
+.scroll-area::-webkit-scrollbar { width: 5px; }
+.scroll-area::-webkit-scrollbar-thumb { background: #ffcc00; border-radius: 10px; }
+
+/* BOTÕES DE ÍCONE */
+.acoes-escudo a { color: #ffcc00; margin-left: 15px; text-decoration: none; font-size: 1.2em; }
+.btn-lixo { color: #f44 !important; }
+.btn-clean { background: none; border: none; color: #666; cursor: pointer; }
+/* Botões de ícone limpos para o Escudo */
+.btn-clean-yellow { background: none; border: none; color: #ffcc00; cursor: pointer; font-size: 1.1em; }
+.btn-clean-green { background: none; border: none; color: #00ff88; cursor: pointer; font-size: 1.1em; }
+.btn-clean-red { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 1.1em; }
+
+.heroi-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.heroi-edit input {
+    font-size: 0.8em;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-color: #ffcc00;
+}
+
+.heroi-edit .acoes-escudo {
+    justify-content: flex-end;
+}
+
+/* Garante que o card de herói mantenha o tamanho ao editar */
+.card-heroi {
+    min-height: 80px;
+}
