@@ -142,3 +142,9 @@ textarea:focus, input:focus { border-color: #ffcc00; outline: none; }
 .card-heroi {
     min-height: 80px;
 }
+
+.container-personagens {
+    display: flex;
+    flex-wrap: wrap; /* Isso faz os itens pularem para a linha de baixo no celular */
+    justify-content: center;
+}
