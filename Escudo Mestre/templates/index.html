@@ -2,7 +2,6 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ Escudo do Mestre 🛡️</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -25,31 +24,32 @@
             </div>
             
             <div class="scroll-area">
-                <div class="card card-cronica">
+                {% for s in sessoes %}
+<div class="card card-cronica">
     <div class="card-header">
         <small><i class="fas fa-calendar-alt"></i> {{ s.data }}</small>
         <div class="acoes-escudo">
-            <!-- BOTÃO DE EDITAR (Adicionado aqui) -->
-            <button onclick="toggleEdit('c-{{s.id}}')" class="btn-clean-yellow"><i class="fas fa-pen"></i></button>
+            <!-- Usa o ID numérico puro, igual nos personagens -->
+            <button onclick="toggleEdit('cronica-{{s.id}}')" class="btn-clean-yellow"><i class="fas fa-pen"></i></button>
             <a href="{{url_for('del_c', id=s.id)}}" class="btn-clean"><i class="fas fa-times"></i></a>
         </div>
     </div>
 
-    <!-- DIV DE VISUALIZAÇÃO -->
-    <div id="v-c-{{s.id}}">
+    <!-- Div de Visualização -->
+    <div id="v-cronica-{{s.id}}">
         <p>{{ s.texto }}</p>
     </div>
 
-    <!-- FORMULÁRIO DE EDIÇÃO (Escondido por padrão) -->
-    <form id="e-c-{{s.id}}" action="{{url_for('editar_c', id=s.id)}}" method="POST" style="display:none;">
-        <textarea name="texto_cronica" style="width: 100%; background: rgba(255,255,255,0.1); color: white; border: 1px solid #444; padding: 5px; font-family: inherit;">{{ s.texto }}</textarea>
+    <!-- Formulário de Edição -->
+    <form id="e-cronica-{{s.id}}" action="{{url_for('editar_c', id=s.id)}}" method="POST" style="display:none;">
+        <textarea name="texto_cronica" style="width: 100%; background: transparent; color: white; border: 1px solid #444; font-family: inherit;">{{ s.texto }}</textarea>
         <div class="acoes-escudo">
             <button type="submit" class="btn-clean-green"><i class="fas fa-check"></i></button>
-            <button type="button" onclick="toggleEdit('c-{{s.id}}')" class="btn-clean-red"><i class="fas fa-times"></i></button>
+            <button type="button" onclick="toggleEdit('cronica-{{s.id}}')" class="btn-clean-red"><i class="fas fa-times"></i></button>
         </div>
     </form>
 </div>
-                {% endfor %}
+{% endfor %}
             </div>
         </section>
 
