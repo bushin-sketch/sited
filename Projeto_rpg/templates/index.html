@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumini Joias | Semi-joias de Luxo</title>
+    <!-- Link corrigido para o Flask encontrar seu CSS na pasta static -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Lumini Joias</div>
+        <nav>
+            <a href="/">Início</a>
+            <a href="#">Varejo</a>
+            <a href="#">Atacado</a>
+            <a href="#">Sobre Nós</a>
+            <!-- Link discreto para o login de dono -->
+            <a href="/login" style="font-size: 0.7rem; opacity: 0.5;">Admin</a>
+        </nav>
+        <div class="header-icons">
+            <span>🔍</span>
+            <span>🛒</span>
+            <a href="/login-cliente">Minha Conta</a>
+            <a href="/favoritos">❤️</a>
+        </div>
+    </header>
+
+    <!-- Bolha WhatsApp SAC (Adicionada conforme pedido) -->
+    <a href="https://wa.me/55SEUNUMERO" style="position:fixed; bottom:20px; right:20px; background:#25d366; color:white; padding:15px; border-radius:50px; z-index:100; text-decoration:none;">WhatsApp SAC</a>
+
+    <main>
+        <!-- Seção Carrossel (ORIGINAL) -->
+        <section class="carousel-container">
+            <div class="carousel-slide">
+                <div class="slide-content">
+                    <h1>Elegância Eterna</h1>
+                    <p>Descubra a sofisticação das nossas peças banhadas a ouro 18k.</p>
+                    <a href="#" class="btn-gold">Explorar Coleção</a>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <!-- Seção de Produtos (DINÂMICA) -->
+        <section class="products-section">
+            <h2 class="section-title">Destaques Exclusivos</h2>
+            <div class="product-grid">
+                {% for p in produtos %}
+                <div class="product-card">
+                    <div class="product-image">Imagem</div>
+                    <h3>{{ p.nome }}</h3>
+                    <p class="price">R$ {{ p.preco }}</p>
+                    <div class="product-card">
+    <a href="/favoritos/add/{{ p.id }}" style="text-decoration:none; float:right;">⭐</a>
+    <div class="product-image">...</div>
+                    
+                    <!-- Checkout que envia Nome, CEP e Endereço para o seu e-mail -->
+                    <form action="https://formspree.io/f/SEU_ID" method="POST" style="display:flex; flex-direction:column; gap:5px; padding:10px;">
+                        <input type="hidden" name="Produto" value="{{ p.nome }}">
+                        <input type="text" name="Nome" placeholder="Nome Completo" required style="padding:5px;">
+                        <input type="text" name="Logistica" placeholder="Endereço e CEP" required style="padding:5px;">
+                        <button type="submit" class="btn-buy" style="cursor:pointer;">Comprar via Pix/Cartão</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Lumini Joias</div>
+            <p>Qualidade e brilho para revenda e varejo.</p>
+            <p><a href="#">Instagram</a> | <a href="#">Facebook</a></p>
+        </div>
+        <div class="footer-bottom">
+            <!-- Copyright Automático -->
+            &copy; {{ now.year }} Lumini Joias. Todos os direitos reservados.
+        </div>
+    </footer>
+</body>
+</html>

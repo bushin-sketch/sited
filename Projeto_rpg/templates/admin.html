@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel de Controle | Lumini Joias</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .admin-main { padding: 50px 8%; background-color: #FDFBF7; min-height: 100vh; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 2px solid #C5A059; padding-bottom: 20px; }
+        .product-table { width: 100%; border-collapse: collapse; background: white; }
+        .product-table th, .product-table td { padding: 15px; border: 1px solid #eee; text-align: left; }
+        .product-table th { background-color: #C5A059; color: white; font-family: 'Poppins', sans-serif; }
+        .status-badge { background: #e3f2fd; color: #1976d2; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-main">
+        <div class="admin-header">
+            <h1 style="font-family: 'Playfair Display', serif;">Controle de Logística e Vendas</h1>
+            <a href="/" class="btn-buy" style="text-decoration: none; font-size: 0.9rem;">Sair do Painel</a>
+        </div>
+
+        <section style="margin-bottom: 40px;">
+            <h2 style="font-family: 'Poppins', sans-serif; margin-bottom: 20px;">Gerenciar Produtos e Preços</h2>
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Preço Atual (R$)</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in produtos %}
+                    <tr>
+                        <td style="font-weight: 600;">{{ p.nome }}</td>
+                        <td><span class="status-badge">{{ p.tipo|capitalize }}</span></td>
+                        <td>
+                            <input type="text" value="{{ p.preco }}" style="width: 100px; padding: 5px; border: 1px solid #C5A059;">
+                        </td>
+                        <td>
+                            <button class="btn-buy" style="padding: 5px 15px; font-size: 0.8rem; cursor: pointer;">Salvar Alteração</button>
+                            <button style="background: none; border: none; color: red; margin-left: 10px; cursor: pointer;">Excluir</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+<!-- Seção de Configuração do Dono - Inserir na Linha 51 -->
+<section style="background: white; padding: 30px; border: 1px solid #C5A059; margin-top: 40px;">
+    <h2 style="font-family: 'Playfair Display', serif; color: #A6823E;">Configurações de Acesso</h2>
+    <p>Altere seus dados de login abaixo:</p>
+    
+    <form action="/atualizar-dono" method="POST" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px;">
+        <input type="text" name="novo_nome" placeholder="Seu Nome Completo" required style="padding: 10px; border: 1px solid #ddd;">
+        <input type="email" name="novo_email" placeholder="Novo E-mail de Login" required style="padding: 10px; border: 1px solid #ddd;">
+        <input type="password" name="nova_senha" placeholder="Nova Senha" required style="padding: 10px; border: 1px solid #ddd;">
+        <button type="submit" class="btn-buy" style="background: #C5A059; color: white; border: none; padding: 12px; cursor: pointer; font-weight: bold;">
+            SALVAR NOVAS CREDENCIAIS
+        </button>
+    </form>
+</section>
+
+        <section style="background: white; padding: 30px; border: 1px dashed #C5A059;">
+            <h3 style="font-family: 'Playfair Display', serif;">+ Adicionar Nova Peça</h3>
+            <p style="font-size: 0.9rem; color: #666;">Use este espaço para cadastrar novas semi-joias na coleção.</p>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <input type="text" placeholder="Nome da Peça" style="flex: 2; padding: 10px;">
+                <input type="text" placeholder="Preço" style="flex: 1; padding: 10px;">
+                <button class="btn-buy" style="flex: 1; cursor: pointer;">Cadastrar</button>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
