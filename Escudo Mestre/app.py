@@ -89,3 +89,9 @@ if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
     app.run(debug=True)
+
+# Mantenha suas rotas acima...
+
+if __name__ == '__main__':
+    # Isso é para rodar localmente no seu PC
+    app.run(debug=True)
