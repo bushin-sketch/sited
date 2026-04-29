@@ -95,3 +95,11 @@ if __name__ == '__main__':
 if __name__ == '__main__':
     # Isso é para rodar localmente no seu PC
     app.run(debug=True)
+
+@app.route('/editar_c/<int:id>', methods=['POST'])
+def editar_c(id):
+    c = Cronica.query.get(id)
+    if c:
+        c.texto = request.form.get('texto_cronica')
+        db.session.commit()
+    return redirect(url_for('home'))
