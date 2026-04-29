@@ -25,14 +25,30 @@
             </div>
             
             <div class="scroll-area">
-                {% for s in sessoes %}
                 <div class="card card-cronica">
-                    <div class="card-header">
-                        <small><i class="fas fa-calendar-alt"></i> {{ s.data }}</small>
-                        <a href="{{url_for('del_c', id=s.id)}}" class="btn-clean"><i class="fas fa-times"></i></a>
-                    </div>
-                    <p>{{ s.texto }}</p>
-                </div>
+    <div class="card-header">
+        <small><i class="fas fa-calendar-alt"></i> {{ s.data }}</small>
+        <div class="acoes-escudo">
+            <!-- BOTÃO DE EDITAR (Adicionado aqui) -->
+            <button onclick="toggleEdit('c-{{s.id}}')" class="btn-clean-yellow"><i class="fas fa-pen"></i></button>
+            <a href="{{url_for('del_c', id=s.id)}}" class="btn-clean"><i class="fas fa-times"></i></a>
+        </div>
+    </div>
+
+    <!-- DIV DE VISUALIZAÇÃO -->
+    <div id="v-c-{{s.id}}">
+        <p>{{ s.texto }}</p>
+    </div>
+
+    <!-- FORMULÁRIO DE EDIÇÃO (Escondido por padrão) -->
+    <form id="e-c-{{s.id}}" action="{{url_for('editar_c', id=s.id)}}" method="POST" style="display:none;">
+        <textarea name="texto_cronica" style="width: 100%; background: rgba(255,255,255,0.1); color: white; border: 1px solid #444; padding: 5px; font-family: inherit;">{{ s.texto }}</textarea>
+        <div class="acoes-escudo">
+            <button type="submit" class="btn-clean-green"><i class="fas fa-check"></i></button>
+            <button type="button" onclick="toggleEdit('c-{{s.id}}')" class="btn-clean-red"><i class="fas fa-times"></i></button>
+        </div>
+    </form>
+</div>
                 {% endfor %}
             </div>
         </section>
