@@ -44,8 +44,8 @@ class Cronica(db.Model):
 with app.app_context():
     db.create_all()
     # Garante um usuário para você entrar
-    if not User.query.filter_by(username='mestre').first():
-        db.session.add(User(username='mestre', password='123'))
+    if not User.query.filter_by(username='Mestre').first():
+        db.session.add(User(username='Mestre', password='123'))
         db.session.commit()
 
 # --- ROTAS DE ACESSO ---
