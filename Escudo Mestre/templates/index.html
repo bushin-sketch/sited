@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>🛡️ Escudo do Mestre 🛡️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>⚔️ Escudo do Mestre ⚔️</h1>
+        <p class="subtitle">Anote o destino, governe as regras.</p>
+    </header>
+
+    <main class="escudo-container">
+        
+        <section class="aba-escudo">
+            <h2>📜 Crônicas e Decisões</h2>
+            <div class="form-escudo">
+                <form method="POST">
+                    <textarea name="texto_cronica" placeholder="O que o destino reserva para hoje?..." required></textarea>
+                    <button type="submit" class="btn-primary">Registrar Evento</button>
+                </form>
+            </div>
+            
+            <div class="scroll-area">
+                {% for s in sessoes %}
+                <div class="card card-cronica">
+                    <div class="card-header">
+                        <small><i class="fas fa-calendar-alt"></i> {{ s.data }}</small>
+                        <a href="{{url_for('del_c', id=s.id)}}" class="btn-clean"><i class="fas fa-times"></i></a>
+                    </div>
+                    <p>{{ s.texto }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="aba-escudo">
+    <h2>⚔️ Iniciativa e Status</h2>
+    <div class="form-escudo">
+        <form method="POST">
+            <div class="input-group">
+                <input type="text" name="nome" placeholder="Nome" required>
+                <input type="text" name="classe" placeholder="Classe" required>
+                <input type="number" name="hp" placeholder="HP" required>
+            </div>
+            <button type="submit" class="btn-primary">Convocar Personagem</button>
+        </form>
+    </div>
+
+    <div class="scroll-area">
+        <div class="grid-herois">
+            {% for p in herois %}
+            <div class="card card-heroi {{'morto' if p.status == 'Morto'}}" id="card-{{p.id}}">
+                
+                <div id="v-{{p.id}}" class="heroi-view">
+                    <div class="heroi-info">
+                        <h3>{{p.nome}} {{'💀' if p.status == 'Morto'}}</h3>
+                        <span class="badge">{{p.classe}}</span>
+                        <div class="hp-display">HP: {{p.hp}}</div>
+                    </div>
+                    <div class="acoes-escudo">
+                        <a href="{{url_for('status_p', id=p.id)}}" title="Matar/Reviver"><i class="fas fa-skull"></i></a>
+                        <button onclick="toggleEdit('{{p.id}}')" class="btn-clean-yellow"><i class="fas fa-pen"></i></button>
+                        <a href="{{url_for('del_p', id=p.id)}}" title="Banir" class="btn-lixo"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+
+                <form id="e-{{p.id}}" action="{{url_for('editar_p', id=p.id)}}" method="POST" class="heroi-edit" style="display:none;">
+                    <input type="text" name="nome" value="{{p.nome}}">
+                    <input type="text" name="classe" value="{{p.classe}}">
+                    <input type="number" name="hp" value="{{p.hp}}">
+                    <div class="acoes-escudo">
+                        <button type="submit" class="btn-clean-green"><i class="fas fa-check"></i></button>
+                        <button type="button" onclick="toggleEdit('{{p.id}}')" class="btn-clean-red"><i class="fas fa-times"></i></button>
+                    </div>
+                </form>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    function toggleEdit(id) {
+        const view = document.getElementById('v-' + id);
+        const edit = document.getElementById('e-' + id);
+        if (view.style.display === 'none') {
+            view.style.display = 'flex';
+            edit.style.display = 'none';
+        } else {
+            view.style.display = 'none';
+            edit.style.display = 'block';
+        }
+    }
+</script>
+
+    </main>
+</body>
+</html>
